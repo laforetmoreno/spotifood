@@ -1,16 +1,9 @@
 import React from 'react';
-import { array, func, object, number } from 'prop-types';
-
+import { array, func, object } from 'prop-types';
 import Select from 'components/Select';
+import { limitExemple } from '../../constants';
 
 import styles from './index.module.scss';
-
-const limitExemple = [
-  { value: 5, name: 5 },
-  { value: 10, name: 10 },
-  { value: 20, name: 20 },
-  { value: 50, name: 50 },
-];
 
 const Header = ({
   filters,
@@ -37,7 +30,7 @@ const Header = ({
       />
       <Select
         className={styles.select}
-        placeholder={limit || 'Quantidade'}
+        placeholder={limit?.name || 'Quantidade'}
         options={limitExemple}
         onChange={onChangeLimit}
       />
@@ -50,7 +43,7 @@ Header.propTypes = {
   onChangeLocale: func,
   onChangeContry: func,
   onChangeLimit: func,
-  limit: number,
+  limit: object,
   country: object,
   locale: object,
 };
@@ -60,7 +53,7 @@ Header.defaultProps = {
   onChangeLocale: () => '',
   onChangeContry: () => '',
   onChangeLimit: () => null,
-  limit: 0,
+  limit: {},
   country: {},
   locale: {},
 };

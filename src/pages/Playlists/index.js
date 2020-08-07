@@ -8,6 +8,7 @@ import List from 'components/List';
 import Page from 'components/Page';
 import Title from 'components/Title';
 import Header from 'components/Header';
+import Loader from 'components/Loader';
 
 import { getFeaturedPlaylists } from 'redux/featuredPlaylists';
 import { getFilters } from 'redux/filters';
@@ -15,18 +16,11 @@ import { getHashParams } from 'helpers';
 
 const refreshPageTime = 30000;
 
-const Playlists = ({
-  getFeaturedPlaylists,
-  getFilters,
-  filters,
-  data,
-  // loading,
-  // filtersLoading,
-}) => {
+const Playlists = ({ getFeaturedPlaylists, getFilters, filters, data, loading }) => {
   const [userToken, setUserToken] = useState('');
   const [locale, setLocale] = useState({ name: 'pt_BR', value: 'pt_BR' });
   const [country, setCountry] = useState({ name: 'Brasil', value: 'BR' });
-  const [limit, setLimit] = useState(5);
+  const [limit, setLimit] = useState({ name: 5, value: 5 });
 
   const onChangeLocale = (name, value) => setLocale({ name, value });
   const onChangeContry = (name, value) => setCountry({ name, value });
@@ -42,7 +36,7 @@ const Playlists = ({
 
   useEffect(() => {
     getFilters();
-  }, []);
+  }, [getFilters]);
 
   useEffect(() => {
     getToken();
@@ -66,31 +60,37 @@ const Playlists = ({
     return () => clearInterval(interval);
   });
 
-  return (
-    <Page>
-      <Header
-        onChangeLocale={onChangeLocale}
-        onChangeContry={onChangeContry}
-        onChangeLimit={onChangeLimit}
-        locale={locale}
-        country={country}
-        limit={limit}
-        filters={filters.data}
-      />
-      <Title title={data?.message} />
-      {data?.playlists?.items?.length ? (
-        <List data={data?.playlists.items} />
-      ) : (
-        <Button link={process.env.REACT_APP_SERVER_URL}>Logar</Button>
-      )}
-    </Page>
-  );
+  const renderContent = () => {
+    if (loading && userToken) {
+      return <Loader />;
+    }
+    if (data?.playlists?.items?.length && !loading) {
+      return (
+        <>
+          <Header
+            onChangeLocale={onChangeLocale}
+            onChangeContry={onChangeContry}
+            onChangeLimit={onChangeLimit}
+            locale={locale}
+            country={country}
+            limit={limit}
+            filters={filters.data}
+          />
+          <Title title={data?.message} />
+          <List data={data?.playlists.items} />
+        </>
+      );
+    }
+
+    return <Button link={process.env.REACT_APP_SERVER_URL}>Logar</Button>;
+  };
+
+  return <Page>{renderContent()}</Page>;
 };
 
 const mapStateToProps = ({ featuredPlaylists, filters }) => ({
   data: featuredPlaylists.data,
   loading: featuredPlaylists.loading,
-  filtersLoading: filters.loading,
   filters,
 });
 
@@ -105,7 +105,6 @@ Playlists.propTypes = {
   filters: object,
   data: object,
   loading: bool,
-  filtersLoading: bool,
 };
 
 Playlists.defaultProps = {
@@ -114,7 +113,6 @@ Playlists.defaultProps = {
   filters: {},
   data: {},
   loading: true,
-  filtersLoading: true,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Playlists);

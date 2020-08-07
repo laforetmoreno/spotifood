@@ -6,10 +6,17 @@
   padding: rem(20px);
   background: $--color-dark-blue;
   border-radius: rem(4px);
+  max-width: rem(300px);
+  min-width: rem(300px);
+
+  @media (max-width: 767px) {
+    min-width: min-content;
+  }
 }
 
 .description {
   margin-bottom: rem(20px);
+  text-align: center;
 }
 
 .image {
