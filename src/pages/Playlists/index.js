@@ -1,20 +1,36 @@
 import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { func, object } from 'prop-types';
+import { func, object, bool } from 'prop-types';
 
 import Button from 'components/Button';
 import List from 'components/List';
 import Page from 'components/Page';
 import Title from 'components/Title';
+import Header from 'components/Header';
 
 import { getFeaturedPlaylists } from 'redux/featuredPlaylists';
+import { getFilters } from 'redux/filters';
 import { getHashParams } from 'helpers';
 
 const refreshPageTime = 30000;
 
-const Home = ({ getFeaturedPlaylists, data }) => {
+const Playlists = ({
+  getFeaturedPlaylists,
+  getFilters,
+  filters,
+  data,
+  // loading,
+  // filtersLoading,
+}) => {
   const [userToken, setUserToken] = useState('');
+  const [locale, setLocale] = useState({ name: 'pt_BR', value: 'pt_BR' });
+  const [country, setCountry] = useState({ name: 'Brasil', value: 'BR' });
+  const [limit, setLimit] = useState(5);
+
+  const onChangeLocale = (name, value) => setLocale({ name, value });
+  const onChangeContry = (name, value) => setCountry({ name, value });
+  const onChangeLimit = (name, value) => setLimit({ name, value });
 
   const getToken = () => {
     if (!userToken) {
@@ -25,16 +41,26 @@ const Home = ({ getFeaturedPlaylists, data }) => {
   };
 
   useEffect(() => {
+    getFilters();
+  }, []);
+
+  useEffect(() => {
     getToken();
 
     if (userToken) {
-      getFeaturedPlaylists({ country: 'BR', locale: 'pt_BR', limit: 10 }, userToken);
+      getFeaturedPlaylists(
+        { country: country.value, locale: locale.value, limit: limit.value },
+        userToken,
+      );
     }
-  }, [userToken, getFeaturedPlaylists]);
+  }, [userToken, getFeaturedPlaylists, locale, country, limit]);
 
   useEffect(() => {
     const interval = setInterval(() => {
-      getFeaturedPlaylists({ country: 'BR', locale: 'pt_BR', limit: 10 }, userToken);
+      getFeaturedPlaylists(
+        { country: country.value, locale: locale.value, limit: limit.value },
+        userToken,
+      );
     }, refreshPageTime);
 
     return () => clearInterval(interval);
@@ -42,6 +68,15 @@ const Home = ({ getFeaturedPlaylists, data }) => {
 
   return (
     <Page>
+      <Header
+        onChangeLocale={onChangeLocale}
+        onChangeContry={onChangeContry}
+        onChangeLimit={onChangeLimit}
+        locale={locale}
+        country={country}
+        limit={limit}
+        filters={filters.data}
+      />
       <Title title={data?.message} />
       {data?.playlists?.items?.length ? (
         <List data={data?.playlists.items} />
@@ -52,22 +87,34 @@ const Home = ({ getFeaturedPlaylists, data }) => {
   );
 };
 
-const mapStateToProps = ({ featuredPlaylists }) => ({
+const mapStateToProps = ({ featuredPlaylists, filters }) => ({
   data: featuredPlaylists.data,
+  loading: featuredPlaylists.loading,
+  filtersLoading: filters.loading,
+  filters,
 });
 
 const mapDispatchToProps = dispatch => ({
   getFeaturedPlaylists: bindActionCreators(getFeaturedPlaylists, dispatch),
+  getFilters: bindActionCreators(getFilters, dispatch),
 });
 
-Home.propTypes = {
+Playlists.propTypes = {
   getFeaturedPlaylists: func,
+  getFilters: func,
+  filters: object,
   data: object,
+  loading: bool,
+  filtersLoading: bool,
 };
 
-Home.defaultProps = {
+Playlists.defaultProps = {
   getFeaturedPlaylists: () => null,
+  getFilters: () => null,
+  filters: {},
   data: {},
+  loading: true,
+  filtersLoading: true,
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Home);
+export default connect(mapStateToProps, mapDispatchToProps)(Playlists);

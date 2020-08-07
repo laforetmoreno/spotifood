@@ -24,4 +24,8 @@ Routes.propTypes = {
   history: object,
 };
 
+Routes.defaultProps = {
+  history: {},
+};
+
 export default Routes;

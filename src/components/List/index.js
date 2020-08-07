@@ -9,6 +9,7 @@ const List = ({ data }) => (
   <ul className={styles.wrapper}>
     {data?.map(item => (
       <Card
+        key={item.description}
         description={item.description}
         image={item.images[0].url}
         link={item?.external_urls?.spotify}

@@ -1,18 +1,12 @@
 import React from 'react';
-import { string } from 'prop-types';
+import { string, oneOfType, array } from 'prop-types';
 
 import styles from './index.module.scss';
 
 const Button = ({ children, className, link, target }) => {
   if (link) {
     return (
-      <a
-        target={target}
-        without
-        rel="noopener noreferrer"
-        className={(className, styles.link)}
-        href={link}
-      >
+      <a target={target} rel="noopener noreferrer" className={(className, styles.link)} href={link}>
         {children}
       </a>
     );
@@ -26,7 +20,7 @@ const Button = ({ children, className, link, target }) => {
 
 Button.propTypes = {
   className: string,
-  children: string,
+  children: oneOfType([string, array]),
   link: string,
   target: string,
 };
@@ -35,7 +29,7 @@ Button.defaultProps = {
   className: '',
   children: '',
   link: '',
-  target: '_blank',
+  target: '',
 };
 
 export default Button;

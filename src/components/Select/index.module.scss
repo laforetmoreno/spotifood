@@ -1,0 +1,23 @@
+@import '../../styles/';
+
+.wrapper {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  color: $--color-dark-blue;
+  font-size: rem(14px);
+  font-variant: tabular-nums;
+  line-height: 1.5;
+  list-style: none;
+  position: relative;
+  display: inline-block;
+  outline: 0;
+  padding: rem(5px);
+  border-radius: rem(4px);
+  background: $--color-muted;
+  border: rem(1px) solid transparent;
+}
+
+.disabled {
+  opacity: 0.5;
+}
