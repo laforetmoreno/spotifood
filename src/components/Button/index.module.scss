@@ -1,3 +1,11 @@
+@import '../../styles/mixins';
+
 .wrapper {
   border: none;
+}
+
+.link {
+  @include flex-default();
+  @include flex-column();
+  @include reset-link();
 }

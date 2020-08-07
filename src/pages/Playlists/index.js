@@ -2,11 +2,14 @@ import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { func, object } from 'prop-types';
-import { getHashParams } from '../../helpers';
 
-import Button from '../../components/Button';
+import Button from 'components/Button';
+import List from 'components/List';
+import Page from 'components/Page';
+import Title from 'components/Title';
 
-import { getFeaturedPlaylists } from '../../redux/featuredPlaylists';
+import { getFeaturedPlaylists } from 'redux/featuredPlaylists';
+import { getHashParams } from 'helpers';
 
 const refreshPageTime = 30000;
 
@@ -37,23 +40,16 @@ const Home = ({ getFeaturedPlaylists, data }) => {
     return () => clearInterval(interval);
   });
 
-  const renderContent = () => {
-    if (data?.playlists?.items?.length > 0) {
-      return (
-        <ul>
-          {data?.playlists.items.map(item => (
-            <>
-              <li>{item.description}</li>
-              <img src={item.images[0].url} alt={item.description} />
-            </>
-          ))}
-        </ul>
-      );
-    }
-    return <Button link={process.env.REACT_APP_SERVER_URL}> Logar</Button>;
-  };
-
-  return <div>{renderContent()}</div>;
+  return (
+    <Page>
+      <Title title={data?.message} />
+      {data?.playlists?.items?.length ? (
+        <List data={data?.playlists.items} />
+      ) : (
+        <Button link={process.env.REACT_APP_SERVER_URL}>Logar</Button>
+      )}
+    </Page>
+  );
 };
 
 const mapStateToProps = ({ featuredPlaylists }) => ({

@@ -3,7 +3,7 @@ import { createStore, applyMiddleware, combineReducers } from 'redux';
 import { composeWithDevTools } from 'redux-devtools-extension';
 import thunk from 'redux-thunk';
 
-import { featuredPlaylists } from '../redux/featuredPlaylists';
+import { featuredPlaylists } from 'redux/featuredPlaylists';
 
 export const reducers = combineReducers({
   featuredPlaylists,

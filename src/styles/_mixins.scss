@@ -1,0 +1,23 @@
+@import './vars';
+
+@mixin flex-default() {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@mixin flex-column() {
+  display: flex;
+  flex-direction: column;
+}
+
+@mixin reset-list() {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+@mixin reset-link() {
+  color: $--color-white;
+  text-decoration: none;
+}

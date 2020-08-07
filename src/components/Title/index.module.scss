@@ -1,0 +1,7 @@
+@import '../../styles';
+
+.wrapper {
+  @include flex-default();
+  color: $--color-white;
+  margin-bottom: 50px;
+}
