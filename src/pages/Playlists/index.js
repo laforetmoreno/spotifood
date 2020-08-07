@@ -4,21 +4,38 @@ import { bindActionCreators } from 'redux';
 import { func, object } from 'prop-types';
 import { getHashParams } from '../../helpers';
 
+import Button from '../../components/Button';
+
 import { getFeaturedPlaylists } from '../../redux/featuredPlaylists';
+
+const refreshPageTime = 30000;
 
 const Home = ({ getFeaturedPlaylists, data }) => {
   const [userToken, setUserToken] = useState('');
-  useEffect(() => {
+
+  const getToken = () => {
     if (!userToken) {
       const token = getHashParams();
       setUserToken(token.access_token);
       localStorage.setItem('@token', token.access_token);
     }
+  };
+
+  useEffect(() => {
+    getToken();
 
     if (userToken) {
       getFeaturedPlaylists({ country: 'BR', locale: 'pt_BR', limit: 10 }, userToken);
     }
   }, [userToken, getFeaturedPlaylists]);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      getFeaturedPlaylists({ country: 'BR', locale: 'pt_BR', limit: 10 }, userToken);
+    }, refreshPageTime);
+
+    return () => clearInterval(interval);
+  });
 
   const renderContent = () => {
     if (data?.playlists?.items?.length > 0) {
@@ -33,7 +50,7 @@ const Home = ({ getFeaturedPlaylists, data }) => {
         </ul>
       );
     }
-    return <a href={process.env.REACT_APP_SERVER_URL}> Logar</a>;
+    return <Button link={process.env.REACT_APP_SERVER_URL}> Logar</Button>;
   };
 
   return <div>{renderContent()}</div>;

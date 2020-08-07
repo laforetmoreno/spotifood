@@ -15,12 +15,12 @@ export const getFeaturedPlaylists = (params, token) => async dispatch => {
   try {
     const spotity = SpotityServices();
 
-    const response = await spotity.getFeaturedPlaylists(token, params);
+    const { message, playlists } = await spotity.getFeaturedPlaylists(token, params);
 
     dispatch({
       type: GET_FEATURED_PLAYLISTS,
-      message: response.message,
-      playlists: response.playlists,
+      message,
+      playlists,
     });
   } catch (error) {
     dispatch({ type: GET_FEATURED_PLAYLISTS_ERROR, error });
