@@ -2,17 +2,17 @@
 
 .wrapper {
   @include flex-column();
-  margin: 20px 0;
-  padding: 20px;
+  margin: rem(20px) 0;
+  padding: rem(20px);
   background: $--color-dark-blue;
-  border-radius: 4px;
+  border-radius: rem(4px);
 }
 
 .description {
-  margin-bottom: 20px;
+  margin-bottom: rem(20px);
 }
 
 .image {
-  max-width: 300px;
-  border-radius: 4px;
+  max-width: rem(300px);
+  border-radius: rem(4px);
 }
