@@ -4,7 +4,7 @@ import { BrowserRouter, Route, Switch, Router } from 'react-router-dom';
 
 import { routes } from './constants';
 
-import Home from './pages/Home/Home';
+import Playlists from './pages/Playlists';
 
 const Routes = ({ history }) => {
   const { home } = routes;
@@ -13,7 +13,7 @@ const Routes = ({ history }) => {
     <BrowserRouter>
       <Router history={history}>
         <Switch>
-          <Route path={home} component={Home} exact />
+          <Route path={home} component={Playlists} exact />
         </Switch>
       </Router>
     </BrowserRouter>
