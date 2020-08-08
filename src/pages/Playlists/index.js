@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+import { format } from 'date-fns';
 import { func, object, bool } from 'prop-types';
 
 import Button from 'components/Button';
@@ -20,17 +21,20 @@ const Playlists = ({ getFeaturedPlaylists, getFilters, filters, data, loading })
   const [userToken, setUserToken] = useState('');
   const [locale, setLocale] = useState({ name: 'pt_BR', value: 'pt_BR' });
   const [country, setCountry] = useState({ name: 'Brasil', value: 'BR' });
-  const [limit, setLimit] = useState({ name: 5, value: 5 });
+  const [limit, setLimit] = useState(5);
+  const [startDate, setStartDate] = useState(new Date());
+  const formattedDate = format(startDate, "yyyy-MM-dd'T'HH:mm:ss");
 
-  const onChangeLocale = (name, value) => setLocale({ name, value });
-  const onChangeContry = (name, value) => setCountry({ name, value });
-  const onChangeLimit = (name, value) => setLimit({ name, value });
+  const onChangeLocale = (value, name) => setLocale({ name, value });
+  const onChangeContry = (value, name) => setCountry({ name, value });
+  const onChangeLimit = value => setLimit(value);
+  const onChangeDate = value => setStartDate(value);
 
   const getToken = () => {
     if (!userToken) {
       const token = getHashParams();
       setUserToken(token.access_token);
-      localStorage.setItem('@token', token.access_token);
+      // localStorage.setItem('@token', token.access_token);
     }
   };
 
@@ -43,11 +47,16 @@ const Playlists = ({ getFeaturedPlaylists, getFilters, filters, data, loading })
 
     if (userToken) {
       getFeaturedPlaylists(
-        { country: country.value, locale: locale.value, limit: limit.value },
+        {
+          country: country.value,
+          locale: locale.value,
+          limit: limit.value,
+          timestamp: formattedDate,
+        },
         userToken,
       );
     }
-  }, [userToken, getFeaturedPlaylists, locale, country, limit]);
+  }, [userToken, getFeaturedPlaylists, locale, country, limit, formattedDate]);
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -75,6 +84,8 @@ const Playlists = ({ getFeaturedPlaylists, getFilters, filters, data, loading })
             country={country}
             limit={limit}
             filters={filters.data}
+            onChangeDate={onChangeDate}
+            startDate={startDate}
           />
           <Title title={data?.message} />
           <List data={data?.playlists.items} />

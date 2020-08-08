@@ -5,7 +5,7 @@ import styles from './index.module.scss';
 
 const Select = ({ onChange, placeholder, disabled, options, className, name, label }) => {
   const handleChange = e => {
-    if (onChange) onChange(e.target.name, e.target.value);
+    if (onChange) onChange(e.target.value, e.target.name);
   };
 
   return (

@@ -1,0 +1,24 @@
+@import '../../styles';
+
+.wrapper {
+  margin-top: rem(10px);
+}
+
+.label {
+  color: $--color-green;
+}
+
+.picker {
+  background: $--color-green;
+  border-radius: rem(4px);
+  margin-top: rem(10px);
+  padding: rem(2px);
+
+  @media (max-width: 767px) {
+    min-width: 100%;
+  }
+
+  div {
+    border: none;
+  }
+}

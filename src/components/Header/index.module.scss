@@ -1,8 +1,12 @@
 @import '../../styles';
 
 .wrapper {
-  @include flex-default();
   padding: rem(20px);
+  display: flex;
+  align-items: inherit;
+  justify-content: space-evenly;
+  max-width: 960px;
+  margin: 0 auto;
 
   @media (max-width: 767px) {
     @include flex-column();
@@ -11,6 +15,7 @@
 }
 
 .select {
-  margin: rem(10px);
-  min-width: rem(200px);
+  @media (min-width: 768px) {
+    max-width: 180px;
+  }
 }

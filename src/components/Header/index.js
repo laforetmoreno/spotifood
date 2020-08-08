@@ -1,5 +1,7 @@
 import React from 'react';
-import { array, func, object } from 'prop-types';
+import { array, func, object, string, oneOfType, number, instanceOf } from 'prop-types';
+import DatePickerWrapper from 'components/DatePickerWrapper';
+
 import Select from 'components/Select';
 import { limitExemple } from '../../constants';
 
@@ -10,9 +12,11 @@ const Header = ({
   onChangeLocale,
   onChangeContry,
   onChangeLimit,
+  onChangeDate,
   limit,
   country,
   locale,
+  startDate,
 }) => {
   return (
     <div className={styles.wrapper}>
@@ -32,11 +36,12 @@ const Header = ({
       />
       <Select
         className={styles.select}
-        placeholder={limit?.name}
+        placeholder={limit}
         options={limitExemple}
         onChange={onChangeLimit}
         label="Quantidade"
       />
+      <DatePickerWrapper onChange={onChangeDate} value={startDate} />
     </div>
   );
 };
@@ -46,9 +51,11 @@ Header.propTypes = {
   onChangeLocale: func,
   onChangeContry: func,
   onChangeLimit: func,
-  limit: object,
+  onChangeDate: func,
+  limit: oneOfType([string, number]),
   country: object,
   locale: object,
+  startDate: instanceOf(Date),
 };
 
 Header.defaultProps = {
@@ -56,9 +63,11 @@ Header.defaultProps = {
   onChangeLocale: () => '',
   onChangeContry: () => '',
   onChangeLimit: () => null,
-  limit: {},
+  onChangeDate: () => new Date(),
+  limit: 0,
   country: {},
   locale: {},
+  startDate: new Date(),
 };
 
 export default Header;
