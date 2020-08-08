@@ -1,6 +1,6 @@
 import React from 'react';
 import { object } from 'prop-types';
-import { BrowserRouter, Route, Switch, Router } from 'react-router-dom';
+import { BrowserRouter, Route, Switch, Router, Redirect } from 'react-router-dom';
 
 import { routes } from './constants';
 
@@ -14,6 +14,7 @@ const Routes = ({ history }) => {
       <Router history={history}>
         <Switch>
           <Route path={home} component={Playlists} exact />
+          <Redirect from="*" to={home} />
         </Switch>
       </Router>
     </BrowserRouter>

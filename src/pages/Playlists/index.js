@@ -4,7 +4,6 @@ import { bindActionCreators } from 'redux';
 import { format } from 'date-fns';
 import { func, object, bool } from 'prop-types';
 
-import Button from 'components/Button';
 import List from 'components/List';
 import Page from 'components/Page';
 import Title from 'components/Title';
@@ -35,7 +34,6 @@ const Playlists = ({ getFeaturedPlaylists, getFilters, filters, data, loading, e
     if (!userToken) {
       const token = getHashParams();
       setUserToken(token.access_token);
-      // localStorage.setItem('@token', token.access_token);
     }
   };
 
@@ -60,14 +58,16 @@ const Playlists = ({ getFeaturedPlaylists, getFilters, filters, data, loading, e
   }, [userToken, getFeaturedPlaylists, locale, country, limit, formattedDate]);
 
   useEffect(() => {
-    const interval = setInterval(() => {
-      getFeaturedPlaylists(
-        { country: country.value, locale: locale.value, limit: limit.value },
-        userToken,
-      );
-    }, refreshPageTime);
+    if (userToken) {
+      const interval = setInterval(() => {
+        getFeaturedPlaylists(
+          { country: country.value, locale: locale.value, limit: limit.value },
+          userToken,
+        );
+      }, refreshPageTime);
 
-    return () => clearInterval(interval);
+      return () => clearInterval(interval);
+    }
   });
 
   const renderContent = () => {
@@ -77,7 +77,7 @@ const Playlists = ({ getFeaturedPlaylists, getFilters, filters, data, loading, e
     if (error) {
       return <Error />;
     }
-    if (data?.playlists?.items?.length && !loading) {
+    if (data?.playlists?.items?.length && !loading && !error) {
       return (
         <>
           <Header
@@ -97,18 +97,23 @@ const Playlists = ({ getFeaturedPlaylists, getFilters, filters, data, loading, e
       );
     }
 
-    return <Button link={process.env.REACT_APP_SERVER_URL}>Logar</Button>;
+    if (userToken?.length > 0 || userToken === undefined) {
+      window.location.replace(process.env.REACT_APP_SERVER_URL);
+    }
   };
 
   return <Page>{renderContent()}</Page>;
 };
 
-const mapStateToProps = ({ featuredPlaylists, filters }) => ({
-  data: featuredPlaylists.data,
-  loading: featuredPlaylists.loading,
-  error: featuredPlaylists.error,
-  filters,
-});
+const mapStateToProps = ({ featuredPlaylists, filters }) => {
+  const { data, loading, error } = featuredPlaylists;
+  return {
+    data,
+    loading,
+    error,
+    filters,
+  };
+};
 
 const mapDispatchToProps = dispatch => ({
   getFeaturedPlaylists: bindActionCreators(getFeaturedPlaylists, dispatch),
@@ -121,6 +126,7 @@ Playlists.propTypes = {
   filters: object,
   data: object,
   loading: bool,
+  error: bool,
 };
 
 Playlists.defaultProps = {
@@ -129,6 +135,7 @@ Playlists.defaultProps = {
   filters: {},
   data: {},
   loading: true,
+  error: false,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Playlists);
