@@ -1,6 +1,11 @@
 @import '../../styles/';
 
 .wrapper {
+  @include flex-column();
+  width: 100%;
+}
+
+.select {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
@@ -14,10 +19,15 @@
   outline: 0;
   padding: rem(5px);
   border-radius: rem(4px);
-  background: $--color-muted;
+  background: $--color-green;
   border: rem(1px) solid transparent;
 }
 
 .disabled {
   opacity: 0.5;
+}
+
+.label {
+  margin-left: rem(10px);
+  color: $--color-green;
 }

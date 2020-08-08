@@ -18,21 +18,24 @@ const Header = ({
     <div className={styles.wrapper}>
       <Select
         className={styles.select}
-        placeholder={locale?.name || 'Local'}
+        placeholder={locale?.name}
         options={filters[0]?.values}
         onChange={onChangeLocale}
+        label="Local"
       />
       <Select
         className={styles.select}
-        placeholder={country?.name || 'País'}
+        placeholder={country?.name}
         options={filters[1]?.values}
         onChange={onChangeContry}
+        label="País"
       />
       <Select
         className={styles.select}
-        placeholder={limit?.name || 'Quantidade'}
+        placeholder={limit?.name}
         options={limitExemple}
         onChange={onChangeLimit}
+        label="Quantidade"
       />
     </div>
   );

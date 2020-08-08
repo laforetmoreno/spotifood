@@ -13,8 +13,4 @@
 .select {
   margin: rem(10px);
   min-width: rem(200px);
-
-  @media (max-width: 767px) {
-    width: 90%;
-  }
 }
