@@ -10,6 +10,7 @@ import Page from 'components/Page';
 import Title from 'components/Title';
 import Header from 'components/Header';
 import Loader from 'components/Loader';
+import Error from 'components/Error';
 
 import { getFeaturedPlaylists } from 'redux/featuredPlaylists';
 import { getFilters } from 'redux/filters';
@@ -17,7 +18,7 @@ import { getHashParams } from 'helpers';
 
 const refreshPageTime = 30000;
 
-const Playlists = ({ getFeaturedPlaylists, getFilters, filters, data, loading }) => {
+const Playlists = ({ getFeaturedPlaylists, getFilters, filters, data, loading, error }) => {
   const [userToken, setUserToken] = useState('');
   const [locale, setLocale] = useState({ name: 'pt_BR', value: 'pt_BR' });
   const [country, setCountry] = useState({ name: 'Brasil', value: 'BR' });
@@ -73,6 +74,9 @@ const Playlists = ({ getFeaturedPlaylists, getFilters, filters, data, loading })
     if (loading && userToken) {
       return <Loader />;
     }
+    if (error) {
+      return <Error />;
+    }
     if (data?.playlists?.items?.length && !loading) {
       return (
         <>
@@ -102,6 +106,7 @@ const Playlists = ({ getFeaturedPlaylists, getFilters, filters, data, loading })
 const mapStateToProps = ({ featuredPlaylists, filters }) => ({
   data: featuredPlaylists.data,
   loading: featuredPlaylists.loading,
+  error: featuredPlaylists.error,
   filters,
 });
 

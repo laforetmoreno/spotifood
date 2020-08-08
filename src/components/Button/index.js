@@ -1,9 +1,9 @@
 import React from 'react';
-import { string, oneOfType, array } from 'prop-types';
+import { string, oneOfType, array, func } from 'prop-types';
 
 import styles from './index.module.scss';
 
-const Button = ({ children, className, link, target }) => {
+const Button = ({ children, className, link, target, onClick }) => {
   if (link) {
     return (
       <a target={target} rel="noopener noreferrer" className={(className, styles.link)} href={link}>
@@ -12,7 +12,7 @@ const Button = ({ children, className, link, target }) => {
     );
   }
   return (
-    <button type="button" className={(className, styles.wrapper)}>
+    <button onClick={onClick} type="button" className={(className, styles.wrapper)}>
       {children}
     </button>
   );
@@ -23,6 +23,7 @@ Button.propTypes = {
   children: oneOfType([string, array]),
   link: string,
   target: string,
+  onClick: func,
 };
 
 Button.defaultProps = {
@@ -30,6 +31,7 @@ Button.defaultProps = {
   children: '',
   link: '',
   target: '',
+  onClick: () => null,
 };
 
 export default Button;

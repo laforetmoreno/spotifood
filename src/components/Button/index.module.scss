@@ -2,6 +2,26 @@
 
 .wrapper {
   border: none;
+  font-size: rem(16px);
+  line-height: 1;
+  border-radius: rem(50px);
+  padding: rem(19px) rem(56px) rem(21px);
+  color: $--color-white;
+  background-color: $--color-green;
+  text-decoration: none;
+  cursor: pointer;
+  outline: none;
+
+  &:active {
+    transform: translateY(-10px);
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+    transition-duration: 0.3s;
+  }
+
+  &:hover {
+    background-color: #1ed760;
+    transition-duration: 0.3s;
+  }
 }
 
 .link {

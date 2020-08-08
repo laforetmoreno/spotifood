@@ -1,0 +1,18 @@
+@import '../../styles';
+
+.wrapper {
+  min-height: calc(100vh - 20px);
+  @include flex-default();
+  @include flex-column();
+}
+
+.image {
+  max-width: rem(200px);
+  margin-top: rem(100px);
+  margin-bottom: rem(50px);
+}
+
+.message {
+  font-size: rem(36px);
+  color: $--color-green;
+}
