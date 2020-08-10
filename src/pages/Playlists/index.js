@@ -13,7 +13,7 @@ import Error from 'components/Error';
 
 import { getFeaturedPlaylists } from 'redux/featuredPlaylists';
 import { getFilters } from 'redux/filters';
-import { getHashParams } from 'helpers';
+import { getHashParams, handleCountries } from 'helpers';
 
 const refreshPageTime = 30000;
 
@@ -26,7 +26,7 @@ const Playlists = ({ getFeaturedPlaylists, getFilters, filters, data, loading, e
   const formattedDate = format(startDate, "yyyy-MM-dd'T'HH:mm:ss");
 
   const onChangeLocale = (value, name) => setLocale({ name, value });
-  const onChangeContry = (value, name) => setCountry({ name, value });
+  const onChangeContry = value => setCountry(handleCountries(value));
   const onChangeLimit = value => setLimit(value);
   const onChangeDate = value => setStartDate(value);
 
@@ -41,29 +41,25 @@ const Playlists = ({ getFeaturedPlaylists, getFilters, filters, data, loading, e
     getFilters();
   }, [getFilters]);
 
+  const query = {
+    country: country.value,
+    locale: locale.value,
+    timestamp: formattedDate,
+    limit,
+  };
+
   useEffect(() => {
     getToken();
 
     if (userToken) {
-      getFeaturedPlaylists(
-        {
-          country: country.value,
-          locale: locale.value,
-          limit: limit.value,
-          timestamp: formattedDate,
-        },
-        userToken,
-      );
+      getFeaturedPlaylists(query, userToken);
     }
   }, [userToken, getFeaturedPlaylists, locale, country, limit, formattedDate]);
 
   useEffect(() => {
     if (userToken) {
       const interval = setInterval(() => {
-        getFeaturedPlaylists(
-          { country: country.value, locale: locale.value, limit: limit.value },
-          userToken,
-        );
+        getFeaturedPlaylists(query, userToken);
       }, refreshPageTime);
 
       return () => clearInterval(interval);
@@ -84,11 +80,11 @@ const Playlists = ({ getFeaturedPlaylists, getFilters, filters, data, loading, e
             onChangeLocale={onChangeLocale}
             onChangeContry={onChangeContry}
             onChangeLimit={onChangeLimit}
+            onChangeDate={onChangeDate}
             locale={locale}
             country={country}
             limit={limit}
             filters={filters.data}
-            onChangeDate={onChangeDate}
             startDate={startDate}
           />
           <Title title={data?.message} />

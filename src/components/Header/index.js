@@ -22,7 +22,7 @@ const Header = ({
     <div className={styles.wrapper}>
       <Select
         className={styles.select}
-        placeholder={locale?.name}
+        placeholder={locale?.value}
         options={filters[0]?.values}
         onChange={onChangeLocale}
         label="Local"
