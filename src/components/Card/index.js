@@ -6,7 +6,7 @@ import Button from '../Button';
 import styles from './index.module.scss';
 
 const Card = ({ description, image, link }) => (
-  <li className={styles.wrapper}>
+  <li data-testid="card" className={styles.wrapper}>
     <Button target="_blank" link={link}>
       <span className={styles.description}>{description}</span>
       <img className={styles.image} src={image} alt={description} />

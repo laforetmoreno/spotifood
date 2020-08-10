@@ -1,0 +1,172 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<DatePickerWrapper /> renders correctly 1`] = `
+<div
+  className="wrapper"
+>
+  <div
+    className="label"
+  >
+    Data
+  </div>
+  <div
+    className="react-date-picker react-date-picker--closed react-date-picker--enabled picker"
+    onFocus={[Function]}
+  >
+    <div
+      className="react-date-picker__wrapper"
+    >
+      <div
+        className="react-date-picker__inputGroup"
+        onClick={[Function]}
+      >
+        <input
+          max="5760-09-12"
+          min="1821-04-19"
+          name="date"
+          onChange={[Function]}
+          onFocus={[Function]}
+          style={
+            Object {
+              "left": "-9999px",
+              "position": "absolute",
+              "top": "-9999px",
+              "visibility": "hidden",
+            }
+          }
+          type="date"
+          value="2020-08-10"
+        />
+        
+        <input
+          autoComplete="off"
+          className="react-date-picker__inputGroup__input react-date-picker__inputGroup__month"
+          max={12}
+          min={1}
+          name="month"
+          onChange={[Function]}
+          onFocus={[Function]}
+          onKeyDown={[Function]}
+          onKeyPress={[Function]}
+          onKeyUp={[Function]}
+          placeholder="--"
+          required={null}
+          type="number"
+          value={8}
+        />
+        <span
+          className="react-date-picker__inputGroup__divider"
+        >
+          /
+        </span>
+        <input
+          autoComplete="off"
+          autoFocus={false}
+          className="react-date-picker__inputGroup__input react-date-picker__inputGroup__day"
+          max={31}
+          min={1}
+          name="day"
+          onChange={[Function]}
+          onFocus={[Function]}
+          onKeyDown={[Function]}
+          onKeyPress={[Function]}
+          onKeyUp={[Function]}
+          placeholder="--"
+          required={null}
+          type="number"
+          value={10}
+        />
+        <span
+          className="react-date-picker__inputGroup__divider"
+        >
+          /
+        </span>
+        <input
+          autoComplete="off"
+          autoFocus={false}
+          className="react-date-picker__inputGroup__input react-date-picker__inputGroup__year"
+          max={275760}
+          min={1}
+          name="year"
+          onChange={[Function]}
+          onFocus={[Function]}
+          onKeyDown={[Function]}
+          onKeyPress={[Function]}
+          onKeyUp={[Function]}
+          placeholder="----"
+          required={null}
+          step={1}
+          type="number"
+          value={2020}
+        />
+        
+      </div>
+      <button
+        className="react-date-picker__clear-button react-date-picker__button"
+        onClick={[Function]}
+        onFocus={[Function]}
+        type="button"
+      >
+        <svg
+          className="react-date-picker__clear-button__icon react-date-picker__button__icon"
+          height={19}
+          stroke="black"
+          strokeWidth={2}
+          viewBox="0 0 19 19"
+          width={19}
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <line
+            x1="4"
+            x2="15"
+            y1="4"
+            y2="15"
+          />
+          <line
+            x1="15"
+            x2="4"
+            y1="4"
+            y2="15"
+          />
+        </svg>
+      </button>
+      <button
+        className="react-date-picker__calendar-button react-date-picker__button"
+        onClick={[Function]}
+        onFocus={[Function]}
+        type="button"
+      >
+        <svg
+          className="react-date-picker__calendar-button__icon react-date-picker__button__icon"
+          height={19}
+          stroke="black"
+          strokeWidth={2}
+          viewBox="0 0 19 19"
+          width={19}
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <rect
+            fill="none"
+            height="15"
+            width="15"
+            x="2"
+            y="2"
+          />
+          <line
+            x1="6"
+            x2="6"
+            y1="0"
+            y2="4"
+          />
+          <line
+            x1="13"
+            x2="13"
+            y1="0"
+            y2="4"
+          />
+        </svg>
+      </button>
+    </div>
+  </div>
+</div>
+`;

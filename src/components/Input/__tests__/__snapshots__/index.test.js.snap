@@ -1,0 +1,37 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Input /> renders correctly 1`] = `
+<div
+  className="wrapper"
+>
+  <span
+    className="label"
+  />
+  <input
+    className="input"
+    data-testid="input"
+    name=""
+    onChange={[Function]}
+    placeholder=""
+    value=""
+  />
+</div>
+`;
+
+exports[`<Input /> should render a input with placeholder 1`] = `
+<div
+  className="wrapper"
+>
+  <span
+    className="label"
+  />
+  <input
+    className="input"
+    data-testid="input"
+    name=""
+    onChange={[Function]}
+    placeholder="Exemple"
+    value=""
+  />
+</div>
+`;

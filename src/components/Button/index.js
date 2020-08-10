@@ -12,7 +12,12 @@ const Button = ({ children, className, link, target, onClick }) => {
     );
   }
   return (
-    <button onClick={onClick} type="button" className={(className, styles.wrapper)}>
+    <button
+      data-testid="btn"
+      onClick={onClick}
+      type="button"
+      className={(className, styles.wrapper)}
+    >
       {children}
     </button>
   );

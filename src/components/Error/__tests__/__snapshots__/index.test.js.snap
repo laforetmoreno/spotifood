@@ -1,0 +1,27 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Error /> renders correctly 1`] = `
+<div
+  className="wrapper"
+  data-testid="error"
+>
+  <span
+    className="message"
+  >
+    Ops
+  </span>
+  <img
+    alt="Ops"
+    className="image"
+    src="error.svg"
+  />
+  <button
+    className="wrapper"
+    data-testid="btn"
+    onClick={[Function]}
+    type="button"
+  >
+    Tentar novamente
+  </button>
+</div>
+`;

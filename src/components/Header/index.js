@@ -31,7 +31,7 @@ const Header = ({
   });
 
   const renderContent = () => (
-    <div className={styles.wrapper}>
+    <ul className={styles.wrapper}>
       <Select
         className={styles.select}
         placeholder={locale?.value}
@@ -60,7 +60,7 @@ const Header = ({
         label="Nome da playlist"
       />
       <DatePickerWrapper onChange={onDateChange} value={startDate} />
-    </div>
+    </ul>
   );
 
   const renderPage = () => {

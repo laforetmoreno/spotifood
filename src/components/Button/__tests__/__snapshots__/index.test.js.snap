@@ -1,0 +1,23 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Button /> renders correctly 1`] = `
+<button
+  className="wrapper"
+  data-testid="btn"
+  onClick={[Function]}
+  type="button"
+>
+  Click here
+</button>
+`;
+
+exports[`<Button /> should render a submit button 1`] = `
+<button
+  className="wrapper"
+  data-testid="btn"
+  onClick={[Function]}
+  type="button"
+>
+  Click here
+</button>
+`;

@@ -3,7 +3,7 @@ import { node } from 'prop-types';
 
 import styles from './index.module.scss';
 
-const Page = ({ children }) => <div className={styles.wrapper}>{children}</div>;
+const Page = ({ children }) => <main className={styles.wrapper}>{children}</main>;
 
 Page.propTypes = {
   children: node,

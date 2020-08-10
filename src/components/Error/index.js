@@ -6,7 +6,7 @@ import errorImage from '../../assets/error.svg';
 import styles from './index.module.scss';
 
 const Error = ({ message }) => (
-  <div className={styles.wrapper}>
+  <div data-testid="error" className={styles.wrapper}>
     <span className={styles.message}>{message}</span>
     <img className={styles.image} alt={message} src={errorImage} />
     <Button onClick={() => window.location.reload()}>Tentar novamente</Button>
