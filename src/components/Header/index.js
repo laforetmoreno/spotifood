@@ -3,20 +3,23 @@ import { array, func, object, string, oneOfType, number, instanceOf } from 'prop
 import DatePickerWrapper from 'components/DatePickerWrapper';
 
 import Select from 'components/Select';
+import Input from 'components/Input';
 import { limitExemple } from '../../constants';
 
 import styles from './index.module.scss';
 
 const Header = ({
   filters,
-  onChangeLocale,
-  onChangeContry,
-  onChangeLimit,
-  onChangeDate,
+  onLocaleChange,
+  onCountryChange,
+  onLimitChange,
+  onDateChange,
+  onInputChange,
   limit,
   country,
   locale,
   startDate,
+  playlist,
 }) => {
   return (
     <div className={styles.wrapper}>
@@ -24,50 +27,60 @@ const Header = ({
         className={styles.select}
         placeholder={locale?.value}
         options={filters[0]?.values}
-        onChange={onChangeLocale}
+        onChange={onLocaleChange}
         label="Local"
       />
       <Select
         className={styles.select}
         placeholder={country?.name}
         options={filters[1]?.values}
-        onChange={onChangeContry}
+        onChange={onCountryChange}
         label="País"
       />
       <Select
         className={styles.select}
         placeholder={limit}
         options={limitExemple}
-        onChange={onChangeLimit}
+        onChange={onLimitChange}
         label="Quantidade"
       />
-      <DatePickerWrapper onChange={onChangeDate} value={startDate} />
+      <Input
+        placeholder="Ex.: Relaxar"
+        onChange={onInputChange}
+        value={playlist}
+        label="Nome da playlist"
+      />
+      <DatePickerWrapper onChange={onDateChange} value={startDate} />
     </div>
   );
 };
 
 Header.propTypes = {
   filters: array,
-  onChangeLocale: func,
-  onChangeContry: func,
-  onChangeLimit: func,
-  onChangeDate: func,
+  onLocaleChange: func,
+  onCountryChange: func,
+  onLimitChange: func,
+  onDateChange: func,
+  onInputChange: func,
   limit: oneOfType([string, number]),
   country: object,
   locale: object,
   startDate: instanceOf(Date),
+  playlist: string,
 };
 
 Header.defaultProps = {
   filters: [],
-  onChangeLocale: () => '',
-  onChangeContry: () => '',
-  onChangeLimit: () => null,
-  onChangeDate: () => new Date(),
+  onLocaleChange: () => '',
+  onCountryChange: () => '',
+  onLimitChange: () => null,
+  onDateChange: () => new Date(),
+  onInputChange: () => '',
   limit: 0,
   country: {},
   locale: {},
   startDate: new Date(),
+  playlist: '',
 };
 
 export default Header;

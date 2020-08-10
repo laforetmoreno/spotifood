@@ -1,0 +1,24 @@
+@import '../../styles/';
+
+.wrapper {
+  @include filters-wrapper-default();
+}
+
+.input {
+  font-size: rem(16px);
+  outline: none;
+  border: none;
+  padding: rem(6px);
+  border-radius: rem(4px);
+  margin-top: rem(10px);
+  background: $--color-green;
+
+  &::placeholder {
+    color: $--color-black;
+    opacity: 0.4;
+  }
+}
+
+.label {
+  color: $--color-green;
+}

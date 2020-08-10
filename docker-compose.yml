@@ -1,0 +1,15 @@
+version: '3.4'
+
+services:
+  spotifood:
+    build:
+      context: .
+      target: development
+    volumes:
+      - ./src:/spotifood/src/
+      - ./.storybook:/spotifood/.storybook/
+      - ./public /spotifood/public/
+    ports:
+      - 3000:3000
+    env_file:
+      - .env

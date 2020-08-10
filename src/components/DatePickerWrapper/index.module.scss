@@ -1,7 +1,7 @@
 @import '../../styles';
 
 .wrapper {
-  margin-top: rem(10px);
+  @include filters-wrapper-default();
 }
 
 .label {

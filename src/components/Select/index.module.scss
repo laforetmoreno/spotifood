@@ -1,9 +1,7 @@
 @import '../../styles/';
 
 .wrapper {
-  @include flex-column();
-  margin-top: 10px;
-  width: 100%;
+  @include filters-wrapper-default();
 }
 
 .select {

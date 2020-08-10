@@ -21,3 +21,12 @@
   color: $--color-white;
   text-decoration: none;
 }
+
+@mixin filters-wrapper-default() {
+  @include flex-column();
+  width: 100%;
+  margin-top: 10px;
+  @media (min-width: 768px) {
+    margin: rem(10px) rem(5px);
+  }
+}

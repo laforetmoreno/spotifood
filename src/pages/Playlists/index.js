@@ -22,13 +22,15 @@ const Playlists = ({ getFeaturedPlaylists, getFilters, filters, data, loading, e
   const [locale, setLocale] = useState({ name: 'pt_BR', value: 'pt_BR' });
   const [country, setCountry] = useState({ name: 'Brasil', value: 'BR' });
   const [limit, setLimit] = useState(5);
+  const [playlist, setPaylist] = useState('');
   const [startDate, setStartDate] = useState(new Date());
   const formattedDate = format(startDate, "yyyy-MM-dd'T'HH:mm:ss");
 
-  const onChangeLocale = (value, name) => setLocale({ name, value });
-  const onChangeContry = value => setCountry(handleCountries(value));
-  const onChangeLimit = value => setLimit(value);
-  const onChangeDate = value => setStartDate(value);
+  const onLocaleChange = (value, name) => setLocale({ name, value });
+  const onCountryChange = value => setCountry(handleCountries(value));
+  const onLimitChange = value => setLimit(value);
+  const onDateChange = value => setStartDate(value);
+  const onInputChange = value => setPaylist(value);
 
   const getToken = () => {
     if (!userToken) {
@@ -66,6 +68,16 @@ const Playlists = ({ getFeaturedPlaylists, getFilters, filters, data, loading, e
     }
   });
 
+  const filterData = () => {
+    if (playlist) {
+      return data?.playlists?.items?.filter(item =>
+        item.description.toLowerCase().includes(playlist.toLowerCase()),
+      );
+    }
+
+    return data?.playlists?.items;
+  };
+
   const renderContent = () => {
     if (loading && userToken) {
       return <Loader />;
@@ -77,18 +89,20 @@ const Playlists = ({ getFeaturedPlaylists, getFilters, filters, data, loading, e
       return (
         <>
           <Header
-            onChangeLocale={onChangeLocale}
-            onChangeContry={onChangeContry}
-            onChangeLimit={onChangeLimit}
-            onChangeDate={onChangeDate}
+            onLocaleChange={onLocaleChange}
+            onCountryChange={onCountryChange}
+            onLimitChange={onLimitChange}
+            onDateChange={onDateChange}
+            onInputChange={onInputChange}
             locale={locale}
             country={country}
             limit={limit}
             filters={filters.data}
             startDate={startDate}
+            playlist={playlist}
           />
           <Title title={data?.message} />
-          <List data={data?.playlists.items} />
+          <List data={filterData()} />
         </>
       );
     }
