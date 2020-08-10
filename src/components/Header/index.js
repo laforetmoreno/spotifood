@@ -1,9 +1,12 @@
 import React from 'react';
 import { array, func, object, string, oneOfType, number, instanceOf } from 'prop-types';
-import DatePickerWrapper from 'components/DatePickerWrapper';
+import { useMediaQuery } from 'react-responsive';
 
+import DatePickerWrapper from 'components/DatePickerWrapper';
 import Select from 'components/Select';
 import Input from 'components/Input';
+import Collapse from 'components/Collapse';
+
 import { limitExemple } from '../../constants';
 
 import styles from './index.module.scss';
@@ -20,8 +23,14 @@ const Header = ({
   locale,
   startDate,
   playlist,
+  collapsed,
+  onCollapseChange,
 }) => {
-  return (
+  const isMobile = useMediaQuery({
+    query: '(max-width: 767px)',
+  });
+
+  const renderContent = () => (
     <div className={styles.wrapper}>
       <Select
         className={styles.select}
@@ -53,6 +62,19 @@ const Header = ({
       <DatePickerWrapper onChange={onDateChange} value={startDate} />
     </div>
   );
+
+  const renderPage = () => {
+    if (isMobile) {
+      return (
+        <Collapse collapsed={collapsed} onClick={onCollapseChange}>
+          {renderContent()}
+        </Collapse>
+      );
+    }
+    return renderContent();
+  };
+
+  return renderPage();
 };
 
 Header.propTypes = {

@@ -3,6 +3,7 @@
 .wrapper {
   @include flex-default();
   color: $--color-white;
-  margin-bottom: rem(50px);
   text-align: center;
+  padding: rem(50px);
+  margin: 0;
 }

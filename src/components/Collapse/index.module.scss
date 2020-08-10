@@ -1,0 +1,57 @@
+.wrapper {
+  overflow: hidden;
+  height: auto;
+  display: flex;
+  flex-direction: column;
+}
+
+.btn {
+  background: transparent;
+  border: none;
+  width: 100%;
+  text-align: center;
+  outline: none;
+  cursor: pointer;
+
+  img {
+    height: 20px;
+  }
+}
+
+.down {
+  transform: rotate(180deg);
+}
+
+.collapse {
+  animation: hidden 1s;
+}
+
+.active {
+  animation: show 1s;
+  overflow: hidden;
+  height: 0;
+
+  img {
+    transform: rotate(180deg);
+  }
+}
+
+@keyframes show {
+  from {
+    height: 361px;
+  }
+
+  to {
+    height: 0;
+  }
+}
+
+@keyframes hidden {
+  from {
+    height: 0;
+  }
+
+  to {
+    height: 361px;
+  }
+}

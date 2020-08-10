@@ -23,6 +23,7 @@ const Playlists = ({ getFeaturedPlaylists, getFilters, filters, data, loading, e
   const [country, setCountry] = useState({ name: 'Brasil', value: 'BR' });
   const [limit, setLimit] = useState(5);
   const [playlist, setPaylist] = useState('');
+  const [collapsed, setCollapsed] = useState(false);
   const [startDate, setStartDate] = useState(new Date());
   const formattedDate = format(startDate, "yyyy-MM-dd'T'HH:mm:ss");
 
@@ -31,6 +32,7 @@ const Playlists = ({ getFeaturedPlaylists, getFilters, filters, data, loading, e
   const onLimitChange = value => setLimit(value);
   const onDateChange = value => setStartDate(value);
   const onInputChange = value => setPaylist(value);
+  const onCollapseChange = () => setCollapsed(!collapsed);
 
   const getToken = () => {
     if (!userToken) {
@@ -100,6 +102,8 @@ const Playlists = ({ getFeaturedPlaylists, getFilters, filters, data, loading, e
             filters={filters.data}
             startDate={startDate}
             playlist={playlist}
+            onCollapseChange={onCollapseChange}
+            collapsed={collapsed}
           />
           <Title title={data?.message} />
           <List data={filterData()} />

@@ -11,5 +11,6 @@
   @media (max-width: 767px) {
     @include flex-column();
     padding: rem(10px) 0;
+    margin: inherit;
   }
 }
