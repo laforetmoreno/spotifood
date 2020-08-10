@@ -1,9 +1,5 @@
 # Spotifood
 
-## Description
-
-Projeto desenvolvido para teste do Ifood.
-
 ## Dependências
 
 Node.js 12+
