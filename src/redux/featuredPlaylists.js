@@ -30,7 +30,7 @@ export const getFeaturedPlaylists = (params, token) => async dispatch => {
   }
 };
 
-export function featuredPlaylists(state = INITIAL_STATE, action = {}) {
+export const featuredPlaylists = (state = INITIAL_STATE, action = {}) => {
   switch (action.type) {
     case GET_FEATURED_PLAYLISTS_START:
       return {
@@ -57,4 +57,4 @@ export function featuredPlaylists(state = INITIAL_STATE, action = {}) {
     default:
       return state;
   }
-}
+};

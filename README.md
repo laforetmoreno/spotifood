@@ -2,8 +2,8 @@
 
 ## Dependências
 
-Node.js 12+
-spotifood-bff
+- (Node.js 12+)[https://nodejs.org/]
+- (spotifood-bff)[https://github.com/morenopereira/bff-spotifood]
 
 ## Problemas encontrados
 
@@ -25,25 +25,25 @@ Um dos valores respondidos pela api não funciona, mas especificamente o parâme
 Clonar o projeto spotifood-bff
 
 1. `cd spotifood-bff`
-2. `cp .env.default .env` (E alterar as envs necessárias)
+2. `cp .env.sample .env` (E alterar as envs necessárias)
 3. `npm install` or `yarn`
 4. `npm start` or `yarn start`
 
 Clonar esse projeto
 
 1. `cd spotifood`
-2. `cp .env.default .env` (E alterar as envs necessárias)
+2. `cp .env.sample .env` (E alterar as envs necessárias)
 3. `npm install` or `yarn`
 4. `npm start` or `yarn start`
 
 ## Rodando projeto no docker
 
 1. `cd spotifood-bff`
-2. `cp .env.default .env` (E alterar as envs necessárias)
+2. `cp .env.sample .env` (E alterar as envs necessárias)
 3. `docker-compose uo --build`
 
 4. `cd .. && cd spotifood`
-5. `cp .env.default .env` (E alterar as envs necessárias)
+5. `cp .env.sample .env` (E alterar as envs necessárias)
 6. `docker-compose uo --build`
 
 ## Scripts

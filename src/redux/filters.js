@@ -20,7 +20,7 @@ export const getFilters = () => async dispatch => {
   }
 };
 
-export function filters(state = INITIAL_STATE, action = {}) {
+export const filters = (state = INITIAL_STATE, action = {}) => {
   switch (action.type) {
     case GET_FILTERS:
       return {
@@ -36,4 +36,4 @@ export function filters(state = INITIAL_STATE, action = {}) {
     default:
       return state;
   }
-}
+};
