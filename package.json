@@ -29,7 +29,8 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "storybook": "start-storybook -p 9009 -s public",
-    "build-storybook": "build-storybook -s public"
+    "build-storybook": "build-storybook -s public",
+    "lint": "./node_modules/.bin/eslint src/*.js"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -46,6 +47,11 @@
       "last 1 safari version"
     ]
   },
+  "husky": {
+    "hooks": {
+      "pre-commit": "yarn lint"
+    }
+  },
   "devDependencies": {
     "@storybook/addon-actions": "^5.3.19",
     "@storybook/addon-links": "^5.3.19",
@@ -60,6 +66,7 @@
     "eslint-plugin-jsx-a11y": "^6.2.3",
     "eslint-plugin-react": "^7.18.3",
     "eslint-plugin-react-hooks": "^1.7.0",
+    "husky": "^4.2.5",
     "prettier": "^1.19.1",
     "pretty-quick": "^2.0.1"
   }
