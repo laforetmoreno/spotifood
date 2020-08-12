@@ -7,7 +7,7 @@ Example project consuming the Spotify api. Using the most used techologies on th
 ## Dependencies
 
 - (Node.js 12+)[https://nodejs.org/]
-- (spotifood-bff)[https://github.com/morenopereira/bff-spotifood]
+- (spotifood-bff)[https://github.com/morenopereira/spotifood-bff]
 
 ## Problems
 
