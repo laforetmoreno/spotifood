@@ -23,8 +23,6 @@ const Header = ({
   locale,
   startDate,
   playlist,
-  collapsed,
-  onCollapseChange,
 }) => {
   const isMobile = useMediaQuery({
     query: '(max-width: 767px)',
@@ -37,39 +35,30 @@ const Header = ({
         placeholder={locale?.value}
         options={filters[0]?.values}
         onChange={onLocaleChange}
-        label="Local"
+        label="Locale"
       />
       <Select
         className={styles.select}
         placeholder={country?.name}
         options={filters[1]?.values}
         onChange={onCountryChange}
-        label="País"
+        label="Country"
       />
       <Select
         className={styles.select}
         placeholder={limit}
         options={limitExemple}
         onChange={onLimitChange}
-        label="Quantidade"
+        label="Quantity"
       />
-      <Input
-        placeholder="Ex.: Relaxar"
-        onChange={onInputChange}
-        value={playlist}
-        label="Nome da playlist"
-      />
+      <Input placeholder="Relax" onChange={onInputChange} value={playlist} label="Playlist name" />
       <DatePickerWrapper onChange={onDateChange} value={startDate} />
     </ul>
   );
 
   const renderPage = () => {
     if (isMobile) {
-      return (
-        <Collapse collapsed={collapsed} onClick={onCollapseChange}>
-          {renderContent()}
-        </Collapse>
-      );
+      return <Collapse>{renderContent()}</Collapse>;
     }
     return renderContent();
   };

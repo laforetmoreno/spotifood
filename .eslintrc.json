@@ -19,6 +19,7 @@
     "no-shadow": "off",
     "import/no-unresolved": 0,
     "camelcase": [0, { "properties": "always" }],
+    "no-unused-vars": ["off"],
     "react/forbid-prop-types": [
       0,
       { "forbid": "", "checkContextTypes": false, "checkChildContextTypes": false }

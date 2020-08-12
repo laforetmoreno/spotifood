@@ -20,7 +20,7 @@ DatePickerWrapper.propTypes = {
 DatePickerWrapper.defaultProps = {
   onChange: () => '',
   value: new Date(),
-  label: 'Data',
+  label: 'Date',
 };
 
 export default DatePickerWrapper;

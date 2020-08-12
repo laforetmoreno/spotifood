@@ -3,11 +3,11 @@ import { createStore, applyMiddleware, combineReducers } from 'redux';
 import { composeWithDevTools } from 'redux-devtools-extension';
 import thunk from 'redux-thunk';
 
-import { featuredPlaylists } from 'redux/featuredPlaylists';
+import { playlists } from 'redux/playlists';
 import { filters } from 'redux/filters';
 
 export const reducers = combineReducers({
-  featuredPlaylists,
+  playlists,
   filters,
 });
 

@@ -26,7 +26,8 @@
   @include flex-column();
   width: 100%;
   margin-top: 10px;
-  @media (min-width: 768px) {
+
+  @media (min-width: $breakpoint-tablet) {
     margin: rem(10px) rem(5px);
   }
 }

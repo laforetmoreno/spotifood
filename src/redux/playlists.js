@@ -1,8 +1,11 @@
 import SpotityServices from '../services/spotity';
-
-const GET_FEATURED_PLAYLISTS_START = 'GET_FEATURED_PLAYLISTS_START';
-const GET_FEATURED_PLAYLISTS_SUCCESS = 'GET_FEATURED_PLAYLISTS_SUCCESS';
-const GET_FEATURED_PLAYLISTS_ERROR = 'GET_FEATURED_PLAYLISTS';
+import { errorsHandler } from '../helpers';
+import {
+  GET_FEATURED_PLAYLISTS_START,
+  GET_FEATURED_PLAYLISTS_SUCCESS,
+  GET_FEATURED_PLAYLISTS_ERROR,
+  GENERIC_ERROR,
+} from './actions';
 
 const INITIAL_STATE = {
   data: {
@@ -11,6 +14,7 @@ const INITIAL_STATE = {
   },
   loading: true,
   error: false,
+  genericError: false,
 };
 
 export const getFeaturedPlaylists = (params, token) => async dispatch => {
@@ -18,7 +22,7 @@ export const getFeaturedPlaylists = (params, token) => async dispatch => {
     dispatch({ type: GET_FEATURED_PLAYLISTS_START });
     const spotity = SpotityServices();
 
-    const { message, playlists } = await spotity.getFeaturedPlaylists(token, params);
+    const { message, playlists } = await spotity.getFeaturedPlaylists(params, token);
 
     dispatch({
       type: GET_FEATURED_PLAYLISTS_SUCCESS,
@@ -26,11 +30,11 @@ export const getFeaturedPlaylists = (params, token) => async dispatch => {
       playlists,
     });
   } catch (error) {
-    dispatch({ type: GET_FEATURED_PLAYLISTS_ERROR, error });
+    errorsHandler(error, dispatch);
   }
 };
 
-export const featuredPlaylists = (state = INITIAL_STATE, action = {}) => {
+export const playlists = (state = INITIAL_STATE, action = {}) => {
   switch (action.type) {
     case GET_FEATURED_PLAYLISTS_START:
       return {
@@ -46,6 +50,7 @@ export const featuredPlaylists = (state = INITIAL_STATE, action = {}) => {
           message: action.message,
           playlists: action.playlists,
         },
+        genericError: false,
       };
     case GET_FEATURED_PLAYLISTS_ERROR:
       return {
@@ -53,6 +58,13 @@ export const featuredPlaylists = (state = INITIAL_STATE, action = {}) => {
         loading: false,
         data: {},
         error: true,
+      };
+    case GENERIC_ERROR:
+      return {
+        ...state,
+        loading: false,
+        data: {},
+        genericError: true,
       };
     default:
       return state;

@@ -5,7 +5,7 @@ RUN apk add --update --no-cache alpine-sdk python
 WORKDIR /spotifood/
 
 COPY package.json yarn.lock .eslintrc.json .prettierrc jsconfig.json /spotifood/
-RUN yarn install --pure-lockfile
+RUN yarn
 
 COPY src /spotifood/src/
 COPY public /spotifood/public/
@@ -15,8 +15,8 @@ EXPOSE 3000
 
 FROM base as development
 
-CMD ["yarn", "start"]
+CMD yarn start
 
 FROM base as production
 
-CMD ["yarn", "start"]
+CMD yarn start

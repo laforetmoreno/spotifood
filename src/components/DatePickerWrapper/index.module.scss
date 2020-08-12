@@ -14,7 +14,7 @@
   margin-top: rem(10px);
   padding: rem(2px);
 
-  @media (max-width: 767px) {
+  @media (max-width: $breakpoint-mobile) {
     min-width: 100%;
   }
 

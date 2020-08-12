@@ -1,11 +1,9 @@
 import FiltersServices from '../services/filters';
-
-const GET_FILTERS = 'GET_FILTERS';
-const GET_FILTERS_ERROR = 'GET_FILTERS_ERROR';
+import { errorsHandler } from '../helpers';
+import { GET_FILTERS } from './actions';
 
 const INITIAL_STATE = {
   data: [],
-  error: false,
 };
 
 export const getFilters = () => async dispatch => {
@@ -16,7 +14,7 @@ export const getFilters = () => async dispatch => {
 
     dispatch({ type: GET_FILTERS, payload: response });
   } catch (error) {
-    dispatch({ type: GET_FILTERS_ERROR, error });
+    errorsHandler(error, dispatch);
   }
 };
 
@@ -26,12 +24,6 @@ export const filters = (state = INITIAL_STATE, action = {}) => {
       return {
         ...state,
         data: action.payload,
-      };
-    case GET_FILTERS_ERROR:
-      return {
-        ...state,
-        data: [],
-        error: true,
       };
     default:
       return state;

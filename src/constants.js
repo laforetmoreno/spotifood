@@ -8,3 +8,8 @@ export const limitExemple = [
   { value: 20, name: 20 },
   { value: 50, name: 50 },
 ];
+
+export const errosCode = {
+  badRequest: 400,
+  unauthorized: 401,
+};
