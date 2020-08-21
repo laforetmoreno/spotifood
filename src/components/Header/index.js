@@ -7,7 +7,7 @@ import Select from 'components/Select';
 import Input from 'components/Input';
 import Collapse from 'components/Collapse';
 
-import { limitExemple } from '../../constants';
+import { limitExemple, mobileSize } from '../../constants';
 
 import styles from './index.module.scss';
 
@@ -22,11 +22,9 @@ const Header = ({
   country,
   locale,
   startDate,
-  playlist,
+  playlistName,
 }) => {
-  const isMobile = useMediaQuery({
-    query: '(max-width: 767px)',
-  });
+  const isMobile = useMediaQuery({ query: mobileSize });
 
   const renderContent = () => (
     <ul className={styles.wrapper}>
@@ -51,7 +49,12 @@ const Header = ({
         onChange={onLimitChange}
         label="Quantity"
       />
-      <Input placeholder="Relax" onChange={onInputChange} value={playlist} label="Playlist name" />
+      <Input
+        placeholder="Relax"
+        onChange={onInputChange}
+        value={playlistName}
+        label="Playlist name"
+      />
       <DatePickerWrapper onChange={onDateChange} value={startDate} />
     </ul>
   );
@@ -67,7 +70,7 @@ const Header = ({
 };
 
 Header.propTypes = {
-  filters: array,
+  filters: array.isRequired,
   onLocaleChange: func,
   onCountryChange: func,
   onLimitChange: func,
@@ -77,11 +80,10 @@ Header.propTypes = {
   country: object,
   locale: object,
   startDate: instanceOf(Date),
-  playlist: string,
+  playlistName: string,
 };
 
 Header.defaultProps = {
-  filters: [],
   onLocaleChange: () => '',
   onCountryChange: () => '',
   onLimitChange: () => null,
@@ -91,7 +93,7 @@ Header.defaultProps = {
   country: {},
   locale: {},
   startDate: new Date(),
-  playlist: '',
+  playlistName: '',
 };
 
 export default Header;

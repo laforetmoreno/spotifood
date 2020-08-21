@@ -13,3 +13,5 @@ export const errosCode = {
   badRequest: 400,
   unauthorized: 401,
 };
+
+export const mobileSize = '(max-width: 767px)'

@@ -11,7 +11,7 @@
     "jest": true
   },
   "rules": {
-    "max-len": ["error", { "code": 100 }],
+    "max-len": ["error", { "code": 120 }],
     "prefer-promise-reject-errors": ["off"],
     "react/jsx-filename-extension": ["off"],
     "react/prop-types": ["warn"],
@@ -20,9 +20,6 @@
     "import/no-unresolved": 0,
     "camelcase": [0, { "properties": "always" }],
     "no-unused-vars": ["off"],
-    "react/forbid-prop-types": [
-      0,
-      { "forbid": "", "checkContextTypes": false, "checkChildContextTypes": false }
-    ]
+    "react/forbid-prop-types": [0, { "forbid": "", "checkContextTypes": false, "checkChildContextTypes": false }]
   }
 }
