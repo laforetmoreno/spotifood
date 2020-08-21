@@ -1,7 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useState } from 'react';
-import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { format } from 'date-fns';
 import { func, object, bool } from 'prop-types';
 
@@ -19,7 +18,19 @@ import useInterval from 'hooks/useInterval';
 
 const refreshPageTime = 30000;
 
-const Playlists = ({ getFeaturedPlaylists, getFilters, filters, data, loading, genericError }) => {
+const Playlists = () => {
+  const dispatch = useDispatch()
+  const {
+    data,
+    loading,
+    genericError
+  } = useSelector(state => state.playlists)
+
+  const {
+    data: filters,
+  } = useSelector(state => state.filters)
+
+  console.log("Playlists -> data", data)
   const [locale, setLocale] = useState({ name: 'pt_BR', value: 'pt_BR' });
   const [country, setCountry] = useState({ name: 'Brasil', value: 'BR' });
   const [limit, setLimit] = useState(5);
@@ -40,8 +51,9 @@ const Playlists = ({ getFeaturedPlaylists, getFilters, filters, data, loading, g
 
   if (hasToken) storage.setAll(getHashParams());
 
+
   useEffect(() => {
-    getFilters();
+    dispatch(getFilters());
   }, [getFilters]);
 
   const query = {
@@ -52,15 +64,18 @@ const Playlists = ({ getFeaturedPlaylists, getFilters, filters, data, loading, g
   };
 
   useEffect(() => {
-    getFeaturedPlaylists(query, storage.get('access_token'));
+    dispatch(getFeaturedPlaylists(query, storage.get('access_token')));
   }, [getFeaturedPlaylists]);
 
   useEffect(() => {
-    getFeaturedPlaylists(query, storage.get('access_token'));
+    if (locale.name !== 'pt_BR') {
+      dispatch(getFeaturedPlaylists(query, storage.get('access_token')));
+
+    }
   }, [getFeaturedPlaylists, locale, country, limit, formattedDate]);
 
   useInterval(() => {
-    if (userToken.access_token) getFeaturedPlaylists(query, storage.get('access_token'));
+    if (userToken.access_token) dispatch(getFeaturedPlaylists(query, storage.get('access_token')));
   }, refreshPageTime);
 
   const filterData = () => {
@@ -110,21 +125,6 @@ const Playlists = ({ getFeaturedPlaylists, getFilters, filters, data, loading, g
   return <Page>{renderContent()}</Page>;
 };
 
-const mapStateToProps = ({ playlists, filters }) => {
-  const { data, loading, genericError } = playlists;
-  return {
-    data,
-    loading,
-    filters,
-    genericError,
-  };
-};
-
-const mapDispatchToProps = dispatch => ({
-  getFeaturedPlaylists: bindActionCreators(getFeaturedPlaylists, dispatch),
-  getFilters: bindActionCreators(getFilters, dispatch),
-});
-
 Playlists.propTypes = {
   getFeaturedPlaylists: func,
   getFilters: func,
@@ -143,4 +143,4 @@ Playlists.defaultProps = {
   genericError: false,
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Playlists);
+export default Playlists;
