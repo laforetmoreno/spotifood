@@ -30,7 +30,6 @@ const Playlists = () => {
     data: filters,
   } = useSelector(state => state.filters)
 
-  console.log("Playlists -> data", data)
   const [locale, setLocale] = useState({ name: 'pt_BR', value: 'pt_BR' });
   const [country, setCountry] = useState({ name: 'Brasil', value: 'BR' });
   const [limit, setLimit] = useState(5);
@@ -43,7 +42,7 @@ const Playlists = () => {
   const hasToken =
     storage.get('access_token') === 'undefined' || storage.get('access_token') === null;
 
-  const onLocaleChange = (value, name) => setLocale({ name, value });
+  const onLocaleChange = async (value, name) => setLocale({ name, value });
   const onCountryChange = value => setCountry(handleCountries(value));
   const onLimitChange = value => setLimit(value);
   const onDateChange = value => setStartDate(value);
@@ -68,10 +67,7 @@ const Playlists = () => {
   }, [getFeaturedPlaylists]);
 
   useEffect(() => {
-    if (locale.name !== 'pt_BR') {
-      dispatch(getFeaturedPlaylists(query, storage.get('access_token')));
-
-    }
+    dispatch(getFeaturedPlaylists(query, storage.get('access_token')));
   }, [getFeaturedPlaylists, locale, country, limit, formattedDate]);
 
   useInterval(() => {
@@ -104,7 +100,7 @@ const Playlists = () => {
             onLimitChange={onLimitChange}
             onDateChange={onDateChange}
             onInputChange={onInputChange}
-            filters={filters.data}
+            filters={filters}
             locale={locale}
             country={country}
             limit={limit}
