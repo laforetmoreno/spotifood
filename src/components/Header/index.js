@@ -6,6 +6,7 @@ import DatePickerWrapper from 'components/DatePickerWrapper';
 import Select from 'components/Select';
 import Input from 'components/Input';
 import Collapse from 'components/Collapse';
+import List from 'components/List';
 
 import { limitExemple, mobileSize } from '../../constants';
 
@@ -27,7 +28,7 @@ const Header = ({
   const isMobile = useMediaQuery({ query: mobileSize });
 
   const renderContent = () => (
-    <ul className={styles.wrapper}>
+    <List className={styles.wrapper}>
       <Select
         className={styles.select}
         placeholder={locale?.value}
@@ -49,14 +50,9 @@ const Header = ({
         onChange={onLimitChange}
         label="Quantity"
       />
-      <Input
-        placeholder="Relax"
-        onChange={onInputChange}
-        value={playlistName}
-        label="Playlist name"
-      />
+      <Input placeholder="Relax" onChange={onInputChange} value={playlistName} label="Playlist name" />
       <DatePickerWrapper onChange={onDateChange} value={startDate} />
-    </ul>
+    </List>
   );
 
   const renderPage = () => {
@@ -84,6 +80,7 @@ Header.propTypes = {
 };
 
 Header.defaultProps = {
+  filters: [],
   onLocaleChange: () => '',
   onCountryChange: () => '',
   onLimitChange: () => null,

@@ -1,0 +1,15 @@
+@import '../../styles/mixins';
+@import '../../styles/';
+
+.wrapper {
+  @include reset-list();
+  @include flex-default();
+  @include flex-column();
+}
+
+.empty {
+  @include flex-default();
+  @include flex-column();
+  color: $--color-white;
+  font-size: rem(20px);
+}

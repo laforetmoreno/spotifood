@@ -15,3 +15,5 @@ export const errosCode = {
 };
 
 export const mobileSize = '(max-width: 767px)'
+
+export const REFRESH_PAGE_TIME = 30000;

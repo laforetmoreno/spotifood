@@ -1,29 +1,15 @@
 import React from 'react';
-import { array } from 'prop-types';
+import { string, node } from 'prop-types';
 
-import Card from '../Card';
-
-import styles from './index.module.scss';
-
-const List = ({ data }) => (
-  <ul className={styles.wrapper}>
-    {data?.map(item => (
-      <Card
-        key={item.description}
-        description={item.description}
-        image={item.images[0].url}
-        link={item?.external_urls?.spotify}
-      />
-    ))}
-  </ul>
-);
+const List = ({ className, children }) => <ul className={className}>{children}</ul>;
 
 List.propTypes = {
-  data: array,
+  className: string,
+  children: node,
 };
 
 List.defaultProps = {
-  data: [],
+  className: '',
 };
 
 export default List;

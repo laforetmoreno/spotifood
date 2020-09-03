@@ -10,7 +10,7 @@ exports[`<Header /> renders correctly 1`] = `
     <span
       className="label"
     >
-      Local
+      Locale
     </span>
     <select
       className="select select false"
@@ -33,7 +33,7 @@ exports[`<Header /> renders correctly 1`] = `
     <span
       className="label"
     >
-      País
+      Country
     </span>
     <select
       className="select select false"
@@ -56,7 +56,7 @@ exports[`<Header /> renders correctly 1`] = `
     <span
       className="label"
     >
-      Quantidade
+      Quantity
     </span>
     <select
       className="select select false"
@@ -99,14 +99,14 @@ exports[`<Header /> renders correctly 1`] = `
     <span
       className="label"
     >
-      Nome da playlist
+      Playlist name
     </span>
     <input
       className="input"
       data-testid="input"
       name=""
       onChange={[Function]}
-      placeholder="Ex.: Relaxar"
+      placeholder="Relax"
       value=""
     />
   </div>
@@ -116,7 +116,7 @@ exports[`<Header /> renders correctly 1`] = `
     <div
       className="label"
     >
-      Data
+      Date
     </div>
     <div
       className="react-date-picker react-date-picker--closed react-date-picker--enabled picker"
@@ -144,7 +144,7 @@ exports[`<Header /> renders correctly 1`] = `
               }
             }
             type="date"
-            value="2020-08-10"
+            value="2020-09-03"
           />
           
           <input
@@ -161,7 +161,7 @@ exports[`<Header /> renders correctly 1`] = `
             placeholder="--"
             required={null}
             type="number"
-            value={8}
+            value={9}
           />
           <span
             className="react-date-picker__inputGroup__divider"
@@ -172,7 +172,7 @@ exports[`<Header /> renders correctly 1`] = `
             autoComplete="off"
             autoFocus={false}
             className="react-date-picker__inputGroup__input react-date-picker__inputGroup__day"
-            max={31}
+            max={30}
             min={1}
             name="day"
             onChange={[Function]}
@@ -183,7 +183,7 @@ exports[`<Header /> renders correctly 1`] = `
             placeholder="--"
             required={null}
             type="number"
-            value={10}
+            value={3}
           />
           <span
             className="react-date-picker__inputGroup__divider"

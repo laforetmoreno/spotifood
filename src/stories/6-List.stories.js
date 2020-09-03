@@ -1,10 +1,10 @@
 import React from 'react';
-import List from 'components/List';
+import ListCards from 'components/ListCards';
 import exempleImage from '../assets/error.svg';
 
 export default {
-  title: 'List',
-  component: List,
+  title: 'ListCards',
+  component: ListCards,
 };
 
 const data = [
@@ -30,4 +30,4 @@ const data = [
   },
 ];
 
-export const Default = () => <List data={data} />;
+export const Default = () => <ListCards data={data} />;

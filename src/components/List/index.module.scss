@@ -1,7 +1,0 @@
-@import '../../styles/mixins';
-
-.wrapper {
-  @include reset-list();
-  @include flex-default();
-  @include flex-column();
-}

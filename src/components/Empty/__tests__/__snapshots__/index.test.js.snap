@@ -1,0 +1,9 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Empty /> renders correctly 1`] = `
+<p
+  className=""
+>
+  Ops, no results.
+</p>
+`;

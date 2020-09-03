@@ -7,19 +7,17 @@ import Header from 'components/Header';
 import Title from 'components/Title';
 import Loader from 'components/Loader';
 import Error from 'components/Error';
-import List from 'components/List';
+import ListCards from 'components/ListCards';
 
 import { getHashParams, handleCountries, localStorageHelper, formattedDate } from 'helpers';
 import { getFeaturedPlaylists } from 'redux/playlists';
 import { getFilters } from 'redux/filters';
+import { REFRESH_PAGE_TIME } from '../../constants';
 import useInterval from 'hooks/useInterval';
-
-const refreshPageTime = 30000;
 
 const Playlists = () => {
   const dispatch = useDispatch();
   const { data, loading, genericError } = useSelector(state => state.playlists);
-
   const { data: filters } = useSelector(state => state.filters);
 
   const [locale, setLocale] = useState({ name: 'pt_BR', value: 'pt_BR' });
@@ -30,7 +28,7 @@ const Playlists = () => {
 
   const userToken = getHashParams();
   const storage = localStorageHelper();
-  const hasToken = storage.get('access_token') === 'undefined' || storage.get('access_token') === null;
+  const notHasToken = storage.get('access_token') === 'undefined' || storage.get('access_token') === null;
 
   const onLocaleChange = async (value, name) => setLocale({ name, value });
   const onCountryChange = value => setCountry(handleCountries(value));
@@ -38,7 +36,7 @@ const Playlists = () => {
   const onDateChange = value => setStartDate(value);
   const onInputChange = value => setPaylistName(value);
 
-  if (hasToken) storage.setAll(getHashParams());
+  if (notHasToken) storage.setAll(getHashParams());
 
   useEffect(() => {
     dispatch(getFilters());
@@ -57,7 +55,7 @@ const Playlists = () => {
 
   useInterval(() => {
     if (userToken.access_token) dispatch(getFeaturedPlaylists(query, storage.get('access_token')));
-  }, refreshPageTime);
+  }, REFRESH_PAGE_TIME);
 
   const filterData = () => {
     if (playlistName) {
@@ -92,8 +90,8 @@ const Playlists = () => {
             startDate={startDate}
             playlistName={playlistName}
           />
-          <Title title={data?.message} />
-          <List data={filterData()} />
+          {filterData().length > 0 && <Title title={data?.message} />}
+          <ListCards data={filterData()} />
         </>
       );
     }
