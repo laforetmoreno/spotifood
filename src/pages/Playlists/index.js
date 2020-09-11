@@ -30,7 +30,7 @@ const Playlists = () => {
   const storage = localStorageHelper();
   const notHasToken = storage.get('access_token') === 'undefined' || storage.get('access_token') === null;
 
-  const onLocaleChange = async (value, name) => setLocale({ name, value });
+  const onLocaleChange = (value, name) => setLocale({ name, value });
   const onCountryChange = value => setCountry(handleCountries(value));
   const onLimitChange = value => setLimit(value);
   const onDateChange = value => setStartDate(value);
